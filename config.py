@@ -1,0 +1,31 @@
+from pathlib import Path
+
+
+# Project root directory
+BASE_DIR = Path(__file__).resolve().parent
+
+# Data directories
+PDF_DIRECTORY = BASE_DIR / "data" / "pdfs"
+PROCESSED_DIRECTORY = BASE_DIR / "data" / "processed"
+
+# RAG configuration
+CHUNK_SIZE = 500
+CHUNK_OVERLAP = 50
+
+# Embedding model
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
+
+# FAISS storage paths
+FAISS_INDEX_PATH = (
+    PROCESSED_DIRECTORY / "faiss.index"
+)
+
+FAISS_METADATA_PATH = (
+    PROCESSED_DIRECTORY / "metadata.pkl"
+)
+
+
+def create_directories():
+    """Create required directories if they don't exist."""
+    PDF_DIRECTORY.mkdir(parents=True, exist_ok=True)
+    PROCESSED_DIRECTORY.mkdir(parents=True, exist_ok=True)
