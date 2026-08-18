@@ -45,6 +45,16 @@ Generated Answer
 - `src/evaluation` - RAG evaluation
 - `tests` - Unit tests
 
-## Current Phase
+## Steps
 
-Phase 1 - Project Setup
+Step 1 - Project Setup
+Step 2 - PDF Ingestion
+Step 3 - Cleaning & Chunking
+Step 4 - Embeddings
+Step 5 - FAISS Vector Store
+Step 6 - Retriever
+Step 7 - Generation
+
+## Build sperate pipeline for indexing & query
+
+Coming soon
