@@ -3,7 +3,9 @@ from config import (
     PDF_DIRECTORY,
     EMBEDDING_MODEL,
     FAISS_INDEX_PATH,
-    FAISS_METADATA_PATH
+    FAISS_METADATA_PATH,
+    LLAMA_MODEL,
+    LLAMA_BASE_URL
 )
 
 from config import create_directories, PDF_DIRECTORY
@@ -11,12 +13,15 @@ from src.ingestion.pdf_loader import extract_all_pdfs
 from src.chunking.document_chunker import process_document
 from src.embeddings.embedding_service import EmbeddingService
 from src.vector_store.faiss_store import (FAISSVectorStore)
+from src.retrieval.retriever import Retriever
+from src.generation.prompt_builder import (build_rag_prompt)
+from src.generation.llama_service import (LlamaService)
 
 
 def main():
     print("===================================")
     print("RAG Assignment")
-    print("Phase 1 - Project Setup")
+    print("Step 1 - Project Setup")
     print("===================================")
 
     # Create required directories
@@ -27,102 +32,37 @@ def main():
 
     print("===================================")
     print("RAG Assignment")
-    print("Phase 2 - PDF Ingestion")
+    print("Step 2 - PDF Ingestion")
     print("===================================")
 
-    create_directories()
+    print("Processing all documents & extracting texts")
 
     documents = extract_all_pdfs(PDF_DIRECTORY)
-
-    print(f"\nTotal PDFs processed: {len(documents)}")
-
-    for document in documents:
-        print(
-            f"{document['filename']} "
-            f"-> {len(document['text'])} characters"
-        )
-
-    print("===================================")
-    print("RAG Assignment")
-    print("Phase 3 - Cleaning & Chunking")
-    print("===================================")
-
-    create_directories()
-
-    documents = extract_all_pdfs(PDF_DIRECTORY)
-
-    total_chunks = 0
-
-    for document in documents:
-
-        chunks = process_document(
-            document["filename"],
-            document["text"]
-        )
-
-        print(
-            f"\n{document['filename']}"
-        )
-
-        print(
-            f"Characters: {len(document['text'])}"
-        )
-
-        print(
-            f"Chunks: {len(chunks)}"
-        )
-
-        total_chunks += len(chunks)
-
-        # Show first chunk for verification
-        if chunks:
-
-            print("\nFirst chunk:")
-            print("--------------------")
-
-            print(chunks[0]["text"][:500])
-
-            print("--------------------")
-
-    print(
-        f"\nTotal chunks created: {total_chunks}"
-    )
-
-    print("===================================")
-    print("RAG Assignment")
-    print("Phase 4 - Embeddings")
-    print("===================================")
-
-    create_directories()
-
-    # -----------------------------
-    # Phase 2: PDF ingestion
-    # -----------------------------
-
-    documents = extract_all_pdfs(PDF_DIRECTORY)
-
+    
     all_chunks = []
 
-    # -----------------------------
-    # Phase 3: Cleaning + Chunking
-    # -----------------------------
+    print("===================================")
+    print("RAG Assignment")
+    print("Step 3 - Cleaning & Chunking")
+    print("===================================")
 
     for document in documents:
-
-        chunks = process_document(
-            document["filename"],
-            document["text"]
-        )
-
-        all_chunks.extend(chunks)
-
+    
+            chunks = process_document(
+                document["filename"],
+                document["text"]
+            )
+    
+            all_chunks.extend(chunks)
+    
     print(
         f"\nTotal chunks: {len(all_chunks)}"
     )
 
-    # -----------------------------
-    # Phase 4: Embeddings
-    # -----------------------------
+    print("===================================")
+    print("RAG Assignment")
+    print("Step 4 - Embeddings")
+    print("===================================")
 
     embedding_service = EmbeddingService(
         EMBEDDING_MODEL
@@ -158,70 +98,8 @@ def main():
 
     print("===================================")
     print("RAG Assignment")
-    print("Phase 5 - FAISS Vector Store")
+    print("Step 5 - FAISS Vector Store")
     print("===================================")
-
-    create_directories()
-
-    # -------------------------
-    # Phase 2
-    # PDF ingestion
-    # -------------------------
-
-    documents = extract_all_pdfs(
-        PDF_DIRECTORY
-    )
-
-    # -------------------------
-    # Phase 3
-    # Chunking
-    # -------------------------
-
-    all_chunks = []
-
-    for document in documents:
-
-        chunks = process_document(
-            document["filename"],
-            document["text"]
-        )
-
-        all_chunks.extend(chunks)
-
-    print(
-        f"\nTotal chunks: {len(all_chunks)}"
-    )
-
-    # -------------------------
-    # Phase 4
-    # Embeddings
-    # -------------------------
-
-    embedding_service = (
-        EmbeddingService(
-            EMBEDDING_MODEL
-        )
-    )
-
-    texts = [
-        chunk["text"]
-        for chunk in all_chunks
-    ]
-
-    embeddings = (
-        embedding_service
-        .generate_embeddings(texts)
-    )
-
-    print(
-        f"Embedding shape: "
-        f"{embeddings.shape}"
-    )
-
-    # -------------------------
-    # Phase 5
-    # FAISS
-    # -------------------------
 
     dimension = embeddings.shape[1]
 
@@ -240,58 +118,6 @@ def main():
     )
 
 
-
-
-
-
-
-
-    query = (
-        "What does this document say "
-        "about artificial intelligence?"
-    )
-
-    query_embedding = (
-        embedding_service
-        .generate_embedding(query)
-    )
-
-    results = vector_store.search(
-        query_embedding,
-        top_k=3
-    )
-
-    print("\n===================================")
-    print("FAISS Search Test")
-    print("===================================")
-
-    for result in results:
-
-        print(
-            f"\nScore: {result['score']:.4f}"
-        )
-
-        print(
-            f"Source: {result['source']}"
-        )
-
-        print(
-            f"Chunk: {result['chunk_id']}"
-        )
-
-        print(
-            f"Text: {result['text'][:300]}"
-        )
-
-
-
-
-
-
-
-
-
-
     # -------------------------
     # Save FAISS
     # -------------------------
@@ -307,6 +133,72 @@ def main():
     print("\nMetadata saved:")
     print(FAISS_METADATA_PATH)
 
+    print("===================================")
+    print("RAG Assignment")
+    print("Step 6 - Retriever")
+    print("===================================")
+
+    retriever = Retriever(
+        embedding_service,
+        vector_store
+    )
+
+    query = input(
+        "\nEnter your question: "
+    )
+
+    results = retriever.retrieve(
+        query=query,
+        top_k=5,
+        similarity_threshold=0.3
+    )
+
+    print("\n===================================")
+    print("Retrieved Results")
+    print("===================================")
+
+    if not results:
+
+        print(
+            "No relevant information found."
+        )
+
+    print("===================================")
+    print("RAG Assignment")
+    print("Step 7 - Generation")
+    print("===================================")
+
+    prompt = build_rag_prompt(
+        query,
+        results
+    )
+
+    llama_service = LlamaService(
+         LLAMA_BASE_URL,
+         LLAMA_MODEL
+    )
+
+    answer = llama_service.generate(
+        prompt
+    )
+
+    print("\n===================================")
+    print("Generated Answer")
+    print("===================================")
+
+    print(answer)
+
+    print("\n===================================")
+    print("Sources")
+    print("===================================")
+
+    for result in results:
+
+        print(
+            f"- {result['source']} "
+            f"(Chunk {result['chunk_id']}, "
+            f"Score: {result['score']:.4f})"
+        )
 
 if __name__ == "__main__":
     main()

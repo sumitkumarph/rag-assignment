@@ -24,6 +24,10 @@ FAISS_METADATA_PATH = (
     PROCESSED_DIRECTORY / "metadata.pkl"
 )
 
+# Llama base url & model
+LLAMA_BASE_URL = "http://localhost:9000"
+LLAMA_MODEL = "llama3.2:3b"
+
 
 def create_directories():
     """Create required directories if they don't exist."""
