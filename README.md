@@ -47,13 +47,13 @@ Generated Answer
 
 ## Steps
 
-Step 1 - Project Setup
-Step 2 - PDF Ingestion
-Step 3 - Cleaning & Chunking
-Step 4 - Embeddings
-Step 5 - FAISS Vector Store
-Step 6 - Retriever
-Step 7 - Generation
+- Step 1 - Project Setup
+- Step 2 - PDF Ingestion
+- Step 3 - Cleaning & Chunking
+- Step 4 - Embeddings
+- Step 5 - FAISS Vector Store
+- Step 6 - Retriever
+- Step 7 - Generation
 
 ## Build sperate pipeline for indexing & query
 
