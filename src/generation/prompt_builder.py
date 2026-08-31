@@ -1,12 +1,18 @@
 from typing import List, Dict
+from src.conversation.memory import ConversationMemory
 
 
 def build_rag_prompt(
     question: str,
-    retrieved_chunks: List[Dict]
+    retrieved_chunks: List[Dict],
+    memory: ConversationMemory
 ) -> str:
 
     context_parts = []
+
+    conversation_history = (
+        memory.get_formatted_history()
+    )
 
     for index, chunk in enumerate(
         retrieved_chunks,
@@ -15,7 +21,7 @@ def build_rag_prompt(
 
         context_parts.append(
             f"""
-Source {index}:
+SOURCE {index}
 Document: {chunk['source']}
 Chunk ID: {chunk['chunk_id']}
 
@@ -26,29 +32,32 @@ Chunk ID: {chunk['chunk_id']}
     context = "\n".join(context_parts)
 
     prompt = f"""
-You are a helpful question-answering assistant.
+You are a document-based question answering assistant.
 
-Answer the user's question using ONLY the
-provided context.
+STRICT RULES:
 
-If the answer cannot be found in the context,
-say:
-
+1. Answer the question ONLY using the provided document context.
+2. Do NOT use outside knowledge.
+3. Do NOT guess, assume, or extrapolate.
+4. If the answer is not supported by the context, say:
 "I don't have enough information in the provided documents."
+5. If the question has multiple parts, answer each part
+   that is supported by the context.
+6. Keep the answer concise but complete.
+7. Every factual statement must be supported by the context.
 
-Do not invent or assume information.
+Previous conversation:
+{conversation_history}
 
-Always base your answer on the retrieved context.
-
-Context:
--------------------------
-{context}
--------------------------
-
-User Question:
+Current question:
 {question}
 
-Answer:
+Document context:
+==================================================
+{context}
+==================================================
+
+Now provide the answer.
 """
 
     return prompt

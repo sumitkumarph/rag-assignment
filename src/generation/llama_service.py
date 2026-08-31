@@ -1,3 +1,5 @@
+import time
+
 import requests
 
 
@@ -17,8 +19,11 @@ class LlamaService:
                 {
                     "role": "system",
                     "content": (
-                        "You are a helpful RAG assistant. "
-                        "Answer only using the provided context."
+                        "You are a document question-answering assistant. "
+                        "Answer ONLY using the provided context. "
+                        "Do not guess or use outside knowledge. "
+                        "If the answer is not in the context, say "
+                        "'I don't have enough information in the provided documents.'"
                     )
                 },
                 {
@@ -26,20 +31,69 @@ class LlamaService:
                     "content": prompt
                 }
             ],
-            "temperature": 0.2,
-            "max_tokens": 512
+            "temperature": 0,
+            "max_tokens": 256
         }
 
         print(f"Calling Llama server: {url}")
 
-        response = requests.post(
-            url,
-            json=payload,
-            timeout=120
+        for attempt in range(1, 4):
+
+            try:
+
+                print(
+                    f"Llama attempt {attempt}/3..."
+                )
+
+                response = requests.post(
+                    url,
+                    json=payload,
+                    timeout=180
+                )
+
+                response.raise_for_status()
+
+                result = response.json()
+
+                answer = (
+                    result["choices"][0]
+                    ["message"]["content"]
+                    .strip()
+                )
+
+                if answer:
+                    return answer
+
+            except requests.exceptions.Timeout:
+
+                print(
+                    f"Llama timeout on attempt {attempt}"
+                )
+
+                if attempt < 3:
+                    time.sleep(2)
+
+            except requests.exceptions.RequestException as e:
+
+                print(
+                    f"Llama request error: {e}"
+                )
+
+                if attempt < 3:
+                    time.sleep(2)
+
+        raise RuntimeError(
+            "Llama server failed after 3 attempts."
         )
 
-        response.raise_for_status()
+        # response = requests.post(
+        #     url,
+        #     json=payload,
+        #     timeout=180
+        # )
 
-        result = response.json()
+        # response.raise_for_status()
 
-        return result["choices"][0]["message"]["content"]
+        # result = response.json()
+
+        # return result["choices"][0]["message"]["content"]

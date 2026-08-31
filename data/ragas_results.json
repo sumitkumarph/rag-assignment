@@ -1,0 +1,127 @@
+{
+    "evaluation_date": "2026-08-31T13:04:15.006984",
+    "evaluation_method": "Sequential single-call LLM evaluation",
+    "total_questions": 6,
+    "thresholds": {
+        "faithfulness": 90.0,
+        "answer_correctness": 80.0,
+        "context_recall": 85.0,
+        "context_precision": 80.0
+    },
+    "scores": {
+        "faithfulness": 79.16666666666666,
+        "answer_correctness": 70.83333333333334,
+        "context_recall": 79.16666666666666,
+        "context_precision": 79.16666666666666
+    },
+    "metric_status": {
+        "faithfulness": {
+            "score": 0.7916666666666666,
+            "threshold": 0.9,
+            "passed": false
+        },
+        "answer_correctness": {
+            "score": 0.7083333333333334,
+            "threshold": 0.8,
+            "passed": false
+        },
+        "context_recall": {
+            "score": 0.7916666666666666,
+            "threshold": 0.85,
+            "passed": false
+        },
+        "context_precision": {
+            "score": 0.7916666666666666,
+            "threshold": 0.8,
+            "passed": false
+        }
+    },
+    "overall_result": "FAIL",
+    "evaluation_status": "COMPLETED",
+    "question_results": [
+        {
+            "id": "Q01",
+            "question": "What problem does the Transformer architecture address, and how does it differ from recurrent and convolutional sequence models?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.75,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q02",
+            "question": "What is scaled dot-product attention in the Transformer, and why is the scaling factor 1/sqrt(d_k) used?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.75,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q03",
+            "question": "What is BERT, and what is the main advantage of its bidirectional pre-training approach?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 1.0,
+                "answer_correctness": 1.0,
+                "context_recall": 1.0,
+                "context_precision": 1.0
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q04",
+            "question": "What are the two pre-training tasks used to train BERT?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.5,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q05",
+            "question": "What is RoBERTa, and what did the authors conclude about the original BERT pre-training procedure?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.75,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q06",
+            "question": "What major training changes did RoBERTa make compared with BERT to improve performance?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.5,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        }
+    ]
+}

@@ -39,7 +39,7 @@ class FAISSVectorStore:
     def search(
         self,
         query_embedding: np.ndarray,
-        top_k: int = 5
+        top_k: int = 3
     ):
 
         query_embedding = np.asarray(

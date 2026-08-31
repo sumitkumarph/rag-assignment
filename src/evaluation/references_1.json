@@ -1,0 +1,52 @@
+[
+{
+"id": "Q01",
+"question": "What problem does the Transformer architecture address, and how does it differ from recurrent and convolutional sequence models?",
+"reference_answer": "The Transformer was designed for sequence transduction tasks such as machine translation. It replaces recurrent and convolutional sequence models with an architecture based entirely on attention mechanisms. Unlike recurrent models, which process tokens sequentially and limit parallelization during training, the Transformer can process positions in parallel. Unlike convolutional models, self-attention can directly connect distant positions with a constant path length."
+},
+{
+"id": "Q02",
+"question": "What is scaled dot-product attention in the Transformer, and why is the scaling factor 1/sqrt(d_k) used?",
+"reference_answer": "Scaled dot-product attention computes the dot products of queries and keys, divides the result by the square root of the key dimension d_k, applies softmax, and uses the resulting weights to combine the values. The 1/sqrt(d_k) scaling prevents the dot products from becoming too large when d_k is large, which would push the softmax into regions with extremely small gradients and make optimization difficult."
+},
+{
+"id": "Q03",
+"question": "What is BERT, and what is the main advantage of its bidirectional pre-training approach?",
+"reference_answer": "BERT stands for Bidirectional Encoder Representations from Transformers. It is a Transformer-based language representation model that pre-trains deep bidirectional representations from unlabeled text by jointly conditioning on both left and right context. This allows the model to capture context from both directions and then be fine-tuned for many downstream NLP tasks with minimal task-specific architecture changes."
+},
+{
+"id": "Q04",
+"question": "What are the two pre-training tasks used to train BERT?",
+"reference_answer": "BERT uses two pre-training tasks: Masked Language Modeling (MLM) and Next Sentence Prediction (NSP). MLM randomly masks some input tokens and trains the model to predict the original tokens using surrounding context. NSP trains the model to determine whether one sentence logically follows another in the original text."
+},
+{
+"id": "Q05",
+"question": "What is RoBERTa, and what did the authors conclude about the original BERT pre-training procedure?",
+"reference_answer": "RoBERTa is a robustly optimized version of BERT. The study found that BERT was significantly undertrained and that its performance could be substantially improved through better training choices, including more training data, longer training, larger batches, and improved hyperparameter settings."
+},
+{
+"id": "Q06",
+"question": "What major training changes did RoBERTa make compared with BERT to improve performance?",
+"reference_answer": "RoBERTa increased the amount of training data and training time, used larger batches, optimized the learning rate and other hyperparameters, removed the Next Sentence Prediction objective, and used dynamic masking. These changes showed that BERT's original architecture was capable of stronger performance when trained more effectively."
+},
+{
+"id": "Q07",
+"question": "What is the main idea behind the T5 text-to-text framework, and how does it unify different NLP tasks?",
+"reference_answer": "T5, or Text-to-Text Transfer Transformer, converts every NLP problem into a text-to-text problem. Both the input and output are represented as text, so the same model architecture and training approach can be used for tasks such as translation, summarization, question answering, and classification. Task-specific prefixes or textual formulations tell the model which task to perform."
+},
+{
+"id": "Q08",
+"question": "What is the Colossal Clean Crawled Corpus (C4), and why was it important for the T5 study?",
+"reference_answer": "C4, the Colossal Clean Crawled Corpus, is a large cleaned collection of English web text created from Common Crawl data. It was important to T5 because the study investigated how pre-training data affects transfer learning performance and used C4 as the large-scale pre-training dataset for the T5 models."
+},
+{
+"id": "Q09",
+"question": "What is GPT-3's few-shot learning approach, and how does it differ from traditional fine-tuning?",
+"reference_answer": "GPT-3 performs few-shot learning by receiving a task description and a small number of examples or demonstrations directly in the input prompt. Unlike traditional fine-tuning, GPT-3 does not update its parameters or perform gradient-based training for each new task. The task is specified through text interaction with the pretrained model."
+},
+{
+"id": "Q10",
+"question": "What were the main capabilities and limitations observed for GPT-3 in the few-shot evaluation?",
+"reference_answer": "GPT-3 demonstrated strong few-shot performance on many NLP tasks, including language modeling, translation, question answering, and cloze tasks, and it showed capabilities on some reasoning and adaptation tasks. However, performance remained inconsistent on several datasets and tasks requiring more complex reasoning, precise interpretation, or specialized knowledge. The study also identified methodological concerns related to training data contamination and large web corpora."
+}
+]

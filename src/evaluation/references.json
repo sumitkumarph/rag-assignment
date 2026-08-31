@@ -1,0 +1,22 @@
+[
+{
+"id": "Q07",
+"question": "What is the main idea behind the T5 text-to-text framework, and how does it unify different NLP tasks?",
+"reference_answer": "T5, or Text-to-Text Transfer Transformer, converts every NLP problem into a text-to-text problem. Both the input and output are represented as text, so the same model architecture and training approach can be used for tasks such as translation, summarization, question answering, and classification. Task-specific prefixes or textual formulations tell the model which task to perform."
+},
+{
+"id": "Q08",
+"question": "What is the Colossal Clean Crawled Corpus (C4), and why was it important for the T5 study?",
+"reference_answer": "C4, the Colossal Clean Crawled Corpus, is a large cleaned collection of English web text created from Common Crawl data. It was important to T5 because the study investigated how pre-training data affects transfer learning performance and used C4 as the large-scale pre-training dataset for the T5 models."
+},
+{
+"id": "Q09",
+"question": "What is GPT-3's few-shot learning approach, and how does it differ from traditional fine-tuning?",
+"reference_answer": "GPT-3 performs few-shot learning by receiving a task description and a small number of examples or demonstrations directly in the input prompt. Unlike traditional fine-tuning, GPT-3 does not update its parameters or perform gradient-based training for each new task. The task is specified through text interaction with the pretrained model."
+},
+{
+"id": "Q10",
+"question": "What were the main capabilities and limitations observed for GPT-3 in the few-shot evaluation?",
+"reference_answer": "GPT-3 demonstrated strong few-shot performance on many NLP tasks, including language modeling, translation, question answering, and cloze tasks, and it showed capabilities on some reasoning and adaptation tasks. However, performance remained inconsistent on several datasets and tasks requiring more complex reasoning, precise interpretation, or specialized knowledge. The study also identified methodological concerns related to training data contamination and large web corpora."
+}
+]

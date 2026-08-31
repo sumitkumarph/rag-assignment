@@ -1,0 +1,72 @@
+[
+{
+"id": "Q01",
+"document": "1706.03762v7.pdf",
+"topic": "Transformer",
+"type": "concept",
+"question": "What problem does the Transformer architecture address, and how does it differ from recurrent and convolutional sequence models?"
+},
+{
+"id": "Q02",
+"document": "1706.03762v7.pdf",
+"topic": "Self-Attention",
+"type": "technical",
+"question": "What is scaled dot-product attention in the Transformer, and why is the scaling factor 1/sqrt(d_k) used?"
+},
+{
+"id": "Q03",
+"document": "1810.04805v2.pdf",
+"topic": "BERT",
+"type": "concept",
+"question": "What is BERT, and what is the main advantage of its bidirectional pre-training approach?"
+},
+{
+"id": "Q04",
+"document": "1810.04805v2.pdf",
+"topic": "BERT",
+"type": "technical",
+"question": "What are the two pre-training tasks used to train BERT?"
+},
+{
+"id": "Q05",
+"document": "1907.11692v1.pdf",
+"topic": "RoBERTa",
+"type": "concept",
+"question": "What is RoBERTa, and what did the authors conclude about the original BERT pre-training procedure?"
+},
+{
+"id": "Q06",
+"document": "1907.11692v1.pdf",
+"topic": "RoBERTa",
+"type": "comparison",
+"question": "What major training changes did RoBERTa make compared with BERT to improve performance?"
+},
+{
+"id": "Q07",
+"document": "1910.10683v4.pdf",
+"topic": "T5",
+"type": "concept",
+"question": "What is the main idea behind the T5 text-to-text framework, and how does it unify different NLP tasks?"
+},
+{
+"id": "Q08",
+"document": "1910.10683v4.pdf",
+"topic": "T5",
+"type": "technical",
+"question": "What is the Colossal Clean Crawled Corpus (C4), and why was it important for the T5 study?"
+},
+{
+"id": "Q09",
+"document": "2005.14165v4.pdf",
+"topic": "GPT-3",
+"type": "concept",
+"question": "What is GPT-3's few-shot learning approach, and how does it differ from traditional fine-tuning?"
+},
+{
+"id": "Q10",
+"document": "2005.14165v4.pdf",
+"topic": "GPT-3",
+"type": "results",
+"question": "What were the main capabilities and limitations observed for GPT-3 in the few-shot evaluation?"
+}
+]

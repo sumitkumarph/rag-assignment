@@ -57,4 +57,17 @@ Generated Answer
 
 ## Build sperate pipeline for indexing & query
 
-Coming soon
+## Indexing pipeline
+
+- Step 1 - Project Setup
+- Step 2 - PDF Ingestion
+- Step 3 - Cleaning & Chunking
+- Step 4 - Embeddings
+- Step 4 - FAISS Vector Store
+
+## Querying pipeline
+
+- Step 1 - Load Embedding model & Load existing FAISS index
+- Step 2 - Prompt Generation
+- Step 3 - Retriever
+- Step 4 - Result Generation with sources 

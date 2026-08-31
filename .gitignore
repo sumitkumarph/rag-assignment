@@ -5,6 +5,9 @@ __pycache__/
 venv/
 env/
 
+.venv-ragas/
+venv-ragas/
+
 .env
 
 data/processed/

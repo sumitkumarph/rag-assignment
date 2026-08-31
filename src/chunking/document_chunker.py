@@ -7,8 +7,8 @@ from src.chunking.text_chunker import create_chunks
 def process_document(
     filename: str,
     text: str,
-    chunk_size: int = 500,
-    chunk_overlap: int = 50
+    chunk_size: int = 800,
+    chunk_overlap: int = 150
 ) -> List[Dict]:
 
     cleaned_text = clean_text(text)
