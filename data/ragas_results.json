@@ -1,7 +1,7 @@
 {
-    "evaluation_date": "2026-08-31T13:04:15.006984",
+    "evaluation_date": "2026-09-01T15:03:44.531313",
     "evaluation_method": "Sequential single-call LLM evaluation",
-    "total_questions": 6,
+    "total_questions": 10,
     "thresholds": {
         "faithfulness": 90.0,
         "answer_correctness": 80.0,
@@ -9,29 +9,29 @@
         "context_precision": 80.0
     },
     "scores": {
-        "faithfulness": 79.16666666666666,
-        "answer_correctness": 70.83333333333334,
-        "context_recall": 79.16666666666666,
-        "context_precision": 79.16666666666666
+        "faithfulness": 77.5,
+        "answer_correctness": 73.0,
+        "context_recall": 79.0,
+        "context_precision": 78.49999999999999
     },
     "metric_status": {
         "faithfulness": {
-            "score": 0.7916666666666666,
+            "score": 0.775,
             "threshold": 0.9,
             "passed": false
         },
         "answer_correctness": {
-            "score": 0.7083333333333334,
+            "score": 0.73,
             "threshold": 0.8,
             "passed": false
         },
         "context_recall": {
-            "score": 0.7916666666666666,
+            "score": 0.79,
             "threshold": 0.85,
             "passed": false
         },
         "context_precision": {
-            "score": 0.7916666666666666,
+            "score": 0.7849999999999999,
             "threshold": 0.8,
             "passed": false
         }
@@ -118,6 +118,62 @@
             "scores": {
                 "faithfulness": 0.75,
                 "answer_correctness": 0.5,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q07",
+            "question": "What is the main idea behind the T5 text-to-text framework, and how does it unify different NLP tasks?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.8,
+                "context_recall": 0.9,
+                "context_precision": 0.85
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q08",
+            "question": "What is the Colossal Clean Crawled Corpus (C4), and why was it important for the T5 study?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.75,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q09",
+            "question": "What is GPT-3's few-shot learning approach, and how does it differ from traditional fine-tuning?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.75,
+                "context_recall": 0.75,
+                "context_precision": 0.75
+            },
+            "evaluation_status": "SUCCESS"
+        },
+        {
+            "id": "Q10",
+            "question": "What were the main capabilities and limitations observed for GPT-3 in the few-shot evaluation?",
+            "document": "",
+            "topic": "",
+            "type": "",
+            "scores": {
+                "faithfulness": 0.75,
+                "answer_correctness": 0.75,
                 "context_recall": 0.75,
                 "context_precision": 0.75
             },
